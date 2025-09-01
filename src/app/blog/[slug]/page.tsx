@@ -1,3 +1,14 @@
+import React from "react";
+
+import path from "node:path";
+import * as fs from "node:fs";
+import matter from 'gray-matter'
+
+import {remark} from 'remark'
+import remarkRehype from "remark-rehype";
+import {slugToTitle} from "@/utils/strings";
+import rehypeStringify from "rehype-stringify";
+
 interface BlogPostProps {
     params: {
         slug: string
@@ -6,25 +17,33 @@ interface BlogPostProps {
 
 
 export async function generateStaticParams() {
-    return [
-        {slug: 'first-post'},
-        {slug: 'second-post'},
-        {slug: 'third-post'},
-    ]
+    const posts_dir = path.join(process.cwd(), 'content', 'blog');
+    const filenames = fs.readdirSync(posts_dir);
+
+    return filenames.map((filename) => {
+        return {
+            slug: filename.replace(/\.md$/, '')
+        }
+    })
 }
 
 export default async function BlogPost({params}: BlogPostProps) {
     const {slug} = await params
 
+    const file_path = path.join(process.cwd(), 'content', 'blog', `${slug}.md`)
+
+    const file_content = fs.readFileSync(file_path, 'utf8')
+
+    const matter_result = matter(file_content)
+
+    const processed_content = await remark().use(remarkRehype).use(rehypeStringify).process(matter_result.content)
+
+    const content_html = processed_content.toString()
+
     return (
         <article>
-            <h1 className="text-3xl font-bold">
-                Blog Post: {slug}
-            </h1>
-            <p className="mt-4">
-                This is a blog post about {slug}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            <h1>{slugToTitle(slug)}</h1>
+            <div dangerouslySetInnerHTML={{__html: content_html}}/>
         </article>
     )
 

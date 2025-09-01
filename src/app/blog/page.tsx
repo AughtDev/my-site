@@ -1,7 +1,26 @@
 import React from 'react';
 import Link from "next/link";
+import path from "node:path";
+import fs from "node:fs";
+import {fileNameToSlug, slugToTitle} from "@/utils/strings";
+
+interface BlogPostMetaData {
+    title: string
+    slug: string
+}
 
 export default function Blog() {
+    const blog_posts: BlogPostMetaData[] = React.useMemo(() => {
+        const posts_dir = path.join(process.cwd(), 'content', 'blog');
+        const filenames = fs.readdirSync(posts_dir);
+
+        return filenames.map((filename) => {
+            const slug = fileNameToSlug(filename);
+            return {
+                title:slugToTitle(slug), slug
+            }
+        })
+    }, []);
 
     return (
         <div className="flex flex-col align-center w-full">
@@ -11,14 +30,10 @@ export default function Blog() {
                 </h1>
             </div>
             <div className={"flex flex-col align-center px-4 gap-8 mt-8"}>
-                {[
-                    {slug: 'first-post'},
-                    {slug: 'second-post'},
-                    {slug: 'third-post'},
-                ].map(({slug}) => (
+                {blog_posts.map(({slug,title}) => (
                     <div key={slug} className="flex flex-row justify-center w-full">
                         <Link href={`/blog/${slug}`} className={"hover:underline hover:text-red-300"}>
-                            {slug.replace('-', ' ')}
+                            {title}
                         </Link>
                     </div>
                 ))}

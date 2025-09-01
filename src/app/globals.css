@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*}*/
+
+
+/* New CSS to override based on the data-theme attribute */
+[data-theme='dark'] {
     --background: #0a0a0a;
     --foreground: #ededed;
-  }
+}
+
+[data-theme='light'] {
+    --background: #fff;
+    --foreground: #000;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    transition: background 0.5s, color 0.5s;
+}
+
+svg#github-icon {
+    height: 40px;
+    width: 40px;
+    fill: var(--foreground);
+}
+
+svg#x-icon {
+    height: 30px;
+    width: 30px;
+    stroke: var(--foreground);
+    fill: var(--foreground);
 }

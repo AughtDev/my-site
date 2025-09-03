@@ -7,6 +7,7 @@ import {fileNameToSlug, slugToTitle} from "@/utils/strings";
 interface BlogPostMetaData {
     title: string
     slug: string
+    unix_timestamp: number
 }
 
 export default function Blog() {
@@ -17,25 +18,36 @@ export default function Blog() {
         return filenames.map((filename) => {
             const slug = fileNameToSlug(filename);
             return {
-                title:slugToTitle(slug), slug
+                title: slugToTitle(slug), slug,
+                // get the date when the file was created
+                unix_timestamp: fs.statSync(path.join(posts_dir, filename)).birthtimeMs
             }
         })
     }, []);
 
     return (
-        <div className="flex flex-col align-center w-full">
-            <div className="flex flex-row align-center justify-center w-full">
-                <h1 className="text-3xl font-bold">
-                    Blog Page
-                </h1>
-            </div>
-            <div className={"flex flex-col align-center px-4 gap-8 mt-8"}>
-                {blog_posts.map(({slug,title}) => (
-                    <div key={slug} className="flex flex-row justify-center w-full">
-                        <Link href={`/blog/${slug}`} className={"hover:underline hover:text-red-300"}>
-                            {title}
-                        </Link>
-                    </div>
+        <div className="flex flex-col items-center w-full">
+            <div className={"flex flex-col px-4 gap-8 mt-8 w-4/6 items-center mr-16"}>
+                {blog_posts.map(({slug, title, unix_timestamp}) => (
+                    <Link
+                        key={slug}
+                        style={{
+                            width: '100%',
+                            height: "2.5rem"
+                        }}
+                        href={`/blog/${slug}`}
+                        className={"hover:underline hover:text-red-300"}>
+                        <div className="flex flex-row justify-between align-center w-full">
+                            <p> {title} </p>
+                            <p className="text-gray-500 text-sm"> {
+                                new Date(unix_timestamp).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                })
+                            } </p>
+                        </div>
+                    </Link>
                 ))}
             </div>
         </div>

@@ -1,11 +1,13 @@
 import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import React from "react";
 import HeaderTab from "@/components/layout/HeaderTab";
 import ThemeProvider from "@/components/theme/ThemeProvider";
 
-import { Inter, Quicksand } from "next/font/google"
+import {Inter, Quicksand} from "next/font/google"
+import ContactLinks from "@/components/home/ContactLinks";
+import ProfilePic from "@/components/home/ProfilePic";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -40,7 +42,12 @@ export default function RootLayout({
                 {label: "Blog", href: "/blog"},
                 {label: "Projects", href: "/projects"},
             ]}/>
-            {children}
+            <div className="flex flex-row  ml-16 mr-4">
+                <div style={{width: '90vw'}}>
+                    {children}
+                </div>
+                <ContactLinks/>
+            </div>
             </body>
             </html>
         </ThemeProvider>

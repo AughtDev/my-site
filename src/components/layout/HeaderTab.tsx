@@ -5,6 +5,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import useTheme from "@/components/theme/useTheme";
 import {MoonStar, Sun} from "lucide-react";
+import ProfilePic from "@/components/home/ProfilePic";
 
 export interface Tab {
     label: string;
@@ -36,20 +37,31 @@ export default function HeaderTab({tabs}: HeaderTabProps) {
     const {theme, toggleTheme} = useTheme()
 
     return (
-        <div className={"flex flex-row justify-end align-center space-x-8 py-4 m-4"}>
+        <div className={"relative flex flex-row justify-end w-full align-center space-x-8 py-4 m-4"}>
+            <div className={"absolute left-0"}>
+                {curr_href != "/" && (
+                    <ProfilePic size={96}/>
+                )}
+            </div>
+
             <div className={"flex flex-row space-x-8"}>
                 {tabs.map((tab) => (
                     <Link
                         key={tab.href}
+                        style={{
+                            fontSize: "1.3rem"
+                        }}
                         className={(checkIfUrlMatchesOrIsParent(curr_href, tab.href) ? "text-red-200" : "") + " text-lg"}
                         href={tab.href}>
                         {tab.label.toUpperCase()}
                     </Link>
                 ))}
             </div>
-
             <div
-                className={"mr-4 ml-6 rounded-md cursor-pointer hover:opacity-70 transition-opacity translate-y-0.5"}
+                style={{
+                    paddingTop: "0.1rem"
+                }}
+                className={"mr-12 ml-4 rounded-md cursor-pointer hover:opacity-70 transition-opacity translate-y-0.5"}
                 onClick={toggleTheme}
             >
                 {theme == "light" ?

@@ -15,12 +15,18 @@
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-syntax-highlighter": "^15.6.6",
+    "rehype-pretty-code": "^0.14.1",
     "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
-    "remark-rehype": "^11.1.2"
+    "remark-html": "^16.0.1",
+    "remark-rehype": "^11.1.2",
+    "sass": "^1.92.0",
+    "shiki": "^3.12.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@shikijs/rehype": "^3.12.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

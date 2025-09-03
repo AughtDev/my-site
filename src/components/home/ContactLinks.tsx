@@ -24,7 +24,7 @@ const LINKS: ContactLink[] = [
 export default function ContactLinks() {
 
     return (
-        <div className={"flex flex-col gap-12"}>
+        <div className={"flex flex-col gap-16 mt-8"}>
             {LINKS.map((link) => (
                 <a key={link.label} href={link.href} target={"_blank"} rel={"noreferrer"}>
                     <div

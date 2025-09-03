@@ -8,6 +8,9 @@ import {remark} from 'remark'
 import remarkRehype from "remark-rehype";
 import {slugToTitle} from "@/utils/strings";
 import rehypeStringify from "rehype-stringify";
+import rehypeShiki from "@shikijs/rehype";
+import rehypePrettyCode from "rehype-pretty-code";
+
 
 interface BlogPostProps {
     params: {
@@ -36,15 +39,26 @@ export default async function BlogPost({params}: BlogPostProps) {
 
     const matter_result = matter(file_content)
 
-    const processed_content = await remark().use(remarkRehype).use(rehypeStringify).process(matter_result.content)
+    const processed_content = await remark()
+        .use(remarkRehype, {allowDangerousHtml: true})
+        .use(rehypePrettyCode, {
+            theme: {
+                light: "rose-pine-dawn",
+                dark: "night-owl"
+            },
+        })
+        .use(rehypeStringify)
+        .process(matter_result.content)
 
     const content_html = processed_content.toString()
 
     return (
-        <article>
-            <h1>{slugToTitle(slug)}</h1>
-            <div dangerouslySetInnerHTML={{__html: content_html}}/>
-        </article>
+        <div className={"flex flex-col w-full items-center"}>
+            <article className={"markdown w-5/6"}>
+                {/*<h1 className={"title"}>{slugToTitle(slug)}</h1>*/}
+                <div dangerouslySetInnerHTML={{__html: content_html}}/>
+            </article>
+        </div>
     )
 
 }

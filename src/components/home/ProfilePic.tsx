@@ -3,11 +3,8 @@ import React from 'react';
 import useTheme from "@/components/theme/useTheme";
 import Image from "next/image";
 
-export default function ProfilePic() {
+export default function ProfilePic({size = 220}: {size?: number}) {
     const {theme} = useTheme()
-    const size = React.useMemo(() => {
-        return 220
-    }, []);
 
     return (
         <div

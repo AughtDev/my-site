@@ -6,13 +6,12 @@ export default function Home() {
 
     return (
         <div className="flex flex-row align-center justify-center w-full">
-            <div className="flex flex-row w-full mx-16">
-                <div className="flex flex-col items-center"
-                     style={{gap: "4rem"}}>
+            <div className="flex flex-row w-full ml-16 mr-4 justify-between">
+                <div className="flex flex-row items-center"
+                     style={{gap: "3rem"}}>
                     <ProfilePic/>
-                    <ContactLinks/>
+                    <Intro/>
                 </div>
-                <Intro/>
             </div>
         </div>
     );

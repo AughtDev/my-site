@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@import "@/styles/markdown";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*}*/
+
+
+/* New CSS to override based on the data-theme attribute */
+[data-theme='dark'] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  pre, pre span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+[data-theme='light'] {
+  --background: #fff;
+  --foreground: #000;
+
+    pre, pre span {
+        color: var(--shiki-light) !important;
+        background-color: var(--shiki-light-bg) !important;
+        /* Optional, if you also want font styles */
+        font-style: var(--shiki-light-font-style) !important;
+        font-weight: var(--shiki-light-font-weight) !important;
+        text-decoration: var(--shiki-light-text-decoration) !important;
+    }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Quicksand, Arial, Helvetica, sans-serif;
+  transition: background 0.5s, color 0.5s;
+}
+
+svg#github-icon {
+  height: 35px;
+  width: 35px;
+  translate: -6px 0;
+  fill: var(--foreground);
+}
+
+svg#x-icon {
+  height: 25px;
+  width: 25px;
+  stroke: var(--foreground);
+  fill: var(--foreground);
+}

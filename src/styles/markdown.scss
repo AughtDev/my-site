@@ -1,0 +1,99 @@
+// Define the highlight color as a Sass variable
+$highlight-color: #F66A74; // Or whatever color you choose
+
+// Declare the CSS variable for global use
+:root {
+  --highlight: #{$highlight-color};
+
+  /* syntax colors */
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-property: #0550ae;
+  --sh-entity: #249a97;
+  --sh-jsxliterals: #6266d1;
+  --sh-string: #00a99a;
+  --sh-keyword: #f47067;
+  --sh-comment: #a19595;
+
+}
+
+// Select the markdown container
+article.markdown {
+  // Styles for the entire article
+  line-height: 1.6;
+
+  // Use a loop to style h1 through h6
+  @for $i from 1 through 6 {
+    // Generate the correct number of hashtags
+    $hashtags: "";
+    @for $j from 1 through $i {
+      $hashtags: $hashtags + "#";
+    }
+    h#{$i} {
+      position: relative;
+      // Adjust padding based on header level
+      padding-left: 0.7rem + (1.3rem * $i);
+      margin-bottom: 0.5rem + (0.2rem * (6 - $i));
+      margin-top: 0.1rem * $i;
+      font-weight: 700;
+      font-size: 2.5rem - (0.25rem * ($i - 1));
+
+      // Style the hashtag using the loop variable
+      &::before {
+        content: '#{$hashtags}';
+        position: absolute;
+        left: 0;
+        font-weight: 900;
+        color: var(--highlight);
+        opacity: 0.3;
+      }
+    }
+  }
+
+
+  // Lists (ordered and unordered)
+  ul, ol {
+    padding-left: 2rem;
+  }
+
+  // List item bullets/numbers
+  ul li::marker, ol li::marker {
+    color: var(--highlight);
+    opacity: 0.6;
+  }
+
+  // Images
+  img {
+    border-radius: 16px;
+    width: 80%;
+    height: auto;
+    margin: 1rem 0;
+  }
+
+  // Bold and italic text
+  //strong, b, em, i {
+  //  background-color: var(--highlight);
+  //  padding: 0 4px;
+  //  border-radius: 4px;
+  //  color: white; // Or another color for contrast
+  //}
+  strong, em {
+    color: var(--highlight);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid var(--highlight);
+    opacity: 0.1;
+    margin: 1rem 0;
+  }
+
+  pre {
+    border-radius: 16px;
+    padding: 1rem;
+    width: 80%;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+}

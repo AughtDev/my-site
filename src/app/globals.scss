@@ -9,8 +9,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -40,14 +38,14 @@
   --background: #fff;
   --foreground: #000;
 
-    pre, pre span {
-        color: var(--shiki-light) !important;
-        background-color: var(--shiki-light-bg) !important;
-        /* Optional, if you also want font styles */
-        font-style: var(--shiki-light-font-style) !important;
-        font-weight: var(--shiki-light-font-weight) !important;
-        text-decoration: var(--shiki-light-text-decoration) !important;
-    }
+  pre, pre span {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-light-font-style) !important;
+    font-weight: var(--shiki-light-font-weight) !important;
+    text-decoration: var(--shiki-light-text-decoration) !important;
+  }
 }
 
 body {

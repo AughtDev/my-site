@@ -10,6 +10,8 @@ import {slugToTitle} from "@/utils/strings";
 import rehypeStringify from "rehype-stringify";
 import rehypeShiki from "@shikijs/rehype";
 import rehypePrettyCode from "rehype-pretty-code";
+import {transformerCopyButton} from "@rehype-pretty/transformers";
+import rehypeCodeMeta from "@/lib/rehype-code-meta";
 
 
 interface BlogPostProps {
@@ -40,13 +42,24 @@ export default async function BlogPost({params}: BlogPostProps) {
     const matter_result = matter(file_content)
 
     const processed_content = await remark()
-        .use(remarkRehype, {allowDangerousHtml: true})
+        .use(remarkRehype)
         .use(rehypePrettyCode, {
             theme: {
                 light: "rose-pine-dawn",
                 dark: "night-owl"
             },
+            transformers: [
+                transformerCopyButton(({
+                    visibility: 'always',
+                    feedbackDuration: 3_000
+                }))
+            ],
+            onVisitTitle: (node) => {
+                console.log("Visiting title:", node);
+            }
+
         })
+        .use(rehypeCodeMeta)
         .use(rehypeStringify)
         .process(matter_result.content)
 
@@ -62,3 +75,4 @@ export default async function BlogPost({params}: BlogPostProps) {
     )
 
 }
+

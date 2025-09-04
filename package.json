@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@rehype-pretty/transformers": "^0.13.2",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.542.0",
     "micromark-util-symbol": "^2.0.1",
@@ -22,7 +23,8 @@
     "remark-html": "^16.0.1",
     "remark-rehype": "^11.1.2",
     "sass": "^1.92.0",
-    "shiki": "^3.12.2"
+    "shiki": "^3.12.2",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

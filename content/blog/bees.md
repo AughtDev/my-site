@@ -66,7 +66,7 @@ function performWaggleDance(distance, direction) {
 
 and here is the same snippet in Python:
 
-```python
+```python 
 def perform_waggle_dance(distance, direction):
     # Rotate the abdomen at a specific angle
     angle = calculate_angle(direction)

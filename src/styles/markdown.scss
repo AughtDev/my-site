@@ -33,18 +33,23 @@ article.markdown {
     h#{$i} {
       position: relative;
       // Adjust padding based on header level
-      padding-left: 0.7rem + (1.3rem * $i);
-      margin-bottom: 0.5rem + (0.2rem * (6 - $i));
+      padding-left: 0.9rem + (1.3rem * $i);
+      margin-bottom: 0.3rem + (0.15rem * (6 - $i));
+      line-height: 1;
       margin-top: 0.1rem * $i;
-      font-weight: 700;
-      font-size: 2.5rem - (0.25rem * ($i - 1));
+      font-weight: 500;
+      font-size: 2.2rem - (0.25rem * ($i - 1));
 
       // Style the hashtag using the loop variable
       &::before {
         content: '#{$hashtags}';
         position: absolute;
         left: 0;
-        font-weight: 900;
+        font-weight: 600;
+        font-family: "Comic Sans MS", serif;
+        letter-spacing: 0.05em;
+        //font-size: 2rem;
+        scale: 0.9 1;
         color: var(--highlight);
         opacity: 0.3;
       }

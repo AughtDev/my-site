@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 import useTheme from "@/components/theme/useTheme";
 import {MoonStar, Sun} from "lucide-react";
 import ProfilePic from "@/components/home/ProfilePic";
+import useMediaType from "@/utils/hooks/useMediaType";
 
 export interface Tab {
     label: string;
@@ -32,12 +33,41 @@ function checkIfUrlMatchesOrIsParent(curr_url: string, tab_url: string): boolean
     return false;
 }
 
+function ThemeToggle() {
+    const {theme, toggleTheme} = useTheme()
+    return (
+        <div
+            style={{
+                paddingTop: "0.1rem"
+            }}
+            className={"mr-12 ml-4 rounded-md cursor-pointer hover:opacity-70 transition-opacity translate-y-0.5"}
+            onClick={toggleTheme}
+        >
+            {theme == "light" ?
+                <MoonStar size={24}/> :
+                <Sun size={24}/>
+            }
+        </div>
+    )
+}
 export default function HeaderTab({tabs}: HeaderTabProps) {
     const curr_href = usePathname()
-    const {theme, toggleTheme} = useTheme()
+    const {is_desktop,is_mobile,is_tablet} = useMediaType()
+
+    const div_class_name = React.useMemo(() => {
+        let name = "fixed flex flex-row items-center w-full"
+        
+        if (is_desktop) {
+            name += " justify-end space-x-8 py-4 m-4 px-4"
+        } else {
+            name += " justify-center space-x-4 py-4"
+        }
+        
+        return name
+    }, [is_desktop]);
 
     return (
-        <div className={"relative flex flex-row justify-end w-full align-center space-x-8 py-4 m-4"}>
+        <div className={div_class_name} style={{zIndex: 999}}>
             <div className={"absolute left-0"}>
                 {curr_href != "/" && (
                     <ProfilePic size={96}/>
@@ -57,18 +87,7 @@ export default function HeaderTab({tabs}: HeaderTabProps) {
                     </Link>
                 ))}
             </div>
-            <div
-                style={{
-                    paddingTop: "0.1rem"
-                }}
-                className={"mr-12 ml-4 rounded-md cursor-pointer hover:opacity-70 transition-opacity translate-y-0.5"}
-                onClick={toggleTheme}
-            >
-                {theme == "light" ?
-                    <MoonStar size={24}/> :
-                    <Sun size={24}/>
-                }
-            </div>
+            <ThemeToggle/>
         </div>
     )
 }

@@ -1,18 +1,16 @@
-import ProfilePic from "@/components/home/ProfilePic";
 import Intro from "@/components/home/Intro";
-import ContactLinks from "@/components/layout/ContactLinks";
+import Pfp from "@/components/home/Pfp";
 
 export default function Home() {
-
     return (
         <div className="flex flex-row align-center justify-center w-full">
-            <div className="flex flex-row w-full ml-16 mr-4 justify-between">
-                <div className="flex flex-row items-center"
+            <div className="flex flex-row w-full justify-between">
+                <div className="flex flex-row items-center justify-center"
                      style={{
-                         gap: "3rem",
+                         // gap: "3rem",
                          width: '100%'
-                }}>
-                    <ProfilePic/>
+                     }}>
+                    <Pfp/>
                     <Intro/>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import rehypeShiki from "@shikijs/rehype";
 import rehypePrettyCode from "rehype-pretty-code";
 import {transformerCopyButton} from "@rehype-pretty/transformers";
 import rehypeCodeMeta from "@/lib/rehype-code-meta";
+import BlogPostContent from "@/components/blog/BlogPostContent";
 
 
 interface BlogPostProps {
@@ -63,14 +64,11 @@ export default async function BlogPost({params}: BlogPostProps) {
         .use(rehypeStringify)
         .process(matter_result.content)
 
-    const content_html = processed_content.toString()
+    const html_content = processed_content.toString()
 
     return (
         <div className={"flex flex-col w-full items-center"}>
-            <article className={"markdown w-5/6"}>
-                {/*<h1 className={"title"}>{slugToTitle(slug)}</h1>*/}
-                <div dangerouslySetInnerHTML={{__html: content_html}}/>
-            </article>
+            <BlogPostContent html_content={html_content}/>
         </div>
     )
 

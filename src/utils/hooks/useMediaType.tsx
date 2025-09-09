@@ -8,9 +8,9 @@ interface MediaTypeResponse {
 }
 
 export default function useMediaType(): MediaTypeResponse {
-    const is_mobile = useMediaQuery({maxWidth: 767})
-    const is_tablet = useMediaQuery({minWidth: 768, maxWidth: 1023})
-    const is_desktop = useMediaQuery({minWidth: 1024})
+    const is_mobile = useMediaQuery({maxWidth: 564})
+    const is_tablet = useMediaQuery({minWidth: 564, maxWidth: 899})
+    const is_desktop = useMediaQuery({minWidth: 900})
 
     return {is_mobile, is_tablet, is_desktop}
 }

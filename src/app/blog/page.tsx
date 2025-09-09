@@ -3,12 +3,7 @@ import Link from "next/link";
 import path from "node:path";
 import fs from "node:fs";
 import {fileNameToSlug, slugToTitle} from "@/utils/strings";
-
-interface BlogPostMetaData {
-    title: string
-    slug: string
-    unix_timestamp: number
-}
+import BlogPostsList, {BlogPostMetaData} from "@/components/blog/PostsList";
 
 export default function Blog() {
     const blog_posts: BlogPostMetaData[] = React.useMemo(() => {
@@ -26,30 +21,8 @@ export default function Blog() {
     }, []);
 
     return (
-        <div className="flex flex-col items-center w-full">
-            <div className={"flex flex-col px-4 gap-8 mt-8 w-4/6 items-center mr-16"}>
-                {blog_posts.map(({slug, title, unix_timestamp}) => (
-                    <Link
-                        key={slug}
-                        style={{
-                            width: '100%',
-                            height: "2.5rem"
-                        }}
-                        href={`/blog/${slug}`}
-                        className={"hover:underline hover:text-red-300"}>
-                        <div className="flex flex-row justify-between align-center w-full">
-                            <p> {title} </p>
-                            <p className="text-gray-500 text-sm"> {
-                                new Date(unix_timestamp).toLocaleDateString('en-US', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })
-                            } </p>
-                        </div>
-                    </Link>
-                ))}
-            </div>
+        <div className="flex flex-col items-center w-full h-full">
+            <BlogPostsList posts={blog_posts}/>
         </div>
     )
 }

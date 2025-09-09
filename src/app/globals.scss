@@ -57,15 +57,16 @@ body {
 
 
 svg#github-icon {
-  height: 35px;
-  width: 35px;
+  //height: 35px;
+  //width: 35px;
   translate: -6px 0;
   fill: var(--foreground);
 }
 
 svg#x-icon {
-  height: 25px;
-  width: 25px;
+  //height: 25px;
+  //width: 25px;
+  translate: -4px 0;
   stroke: var(--foreground);
   fill: var(--foreground);
 }

@@ -1,22 +1,10 @@
-import React from "react";
-
 import path from "node:path";
-import * as fs from "node:fs";
-import matter from 'gray-matter'
-
-import {remark} from 'remark'
-import remarkRehype from "remark-rehype";
-import {slugToTitle} from "@/utils/strings";
-import rehypeStringify from "rehype-stringify";
-import rehypeShiki from "@shikijs/rehype";
-import rehypePrettyCode from "rehype-pretty-code";
-import {transformerCopyButton} from "@rehype-pretty/transformers";
-import rehypeCodeMeta from "@/lib/rehype-code-meta";
+import fs from "node:fs";
 import BlogPostContent from "@/components/blog/BlogPostContent";
+import React from "react";
 import {convertMarkdownFileToHtml} from "@/utils/markdown";
 
-
-interface BlogPostProps {
+interface ProjectPageProps {
     params: {
         slug: string
     }
@@ -24,7 +12,7 @@ interface BlogPostProps {
 
 
 export async function generateStaticParams() {
-    const posts_dir = path.join(process.cwd(), 'content', 'blog');
+    const posts_dir = path.join(process.cwd(), 'content', 'projects');
     const filenames = fs.readdirSync(posts_dir);
 
     return filenames.map((filename) => {
@@ -34,21 +22,21 @@ export async function generateStaticParams() {
     })
 }
 
-export default async function BlogPost({params}: BlogPostProps) {
+export default async function ProjectPage({params}: ProjectPageProps) {
     const {slug} = await params
 
-    const file_path = path.join(process.cwd(), 'content', 'blog', `${slug}.md`)
+    const file_path = path.join(process.cwd(), 'content', 'projects', `${slug}.md`)
 
     const html_content = await convertMarkdownFileToHtml(
+        // fs.readFileSync(file_path, 'utf8')
         file_path
-         // fs.readFileSync(file_path, 'utf8')
     )
 
     if (!html_content) {
         return (
             <div className={"flex flex-col w-full items-center justify-center"}>
                 <p className={"text-lg"}>
-                    This blog post does not exist.
+                    This project does not exist.
                 </p>
             </div>
         )
@@ -61,4 +49,3 @@ export default async function BlogPost({params}: BlogPostProps) {
     )
 
 }
-

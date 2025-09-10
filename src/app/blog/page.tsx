@@ -1,9 +1,8 @@
 import React from 'react';
-import Link from "next/link";
 import path from "node:path";
 import fs from "node:fs";
-import {fileNameToSlug, slugToTitle} from "@/utils/strings";
 import BlogPostsList, {BlogPostMetaData} from "@/components/blog/PostsList";
+import {getBlogPostMetaData} from "@/utils/markdown";
 
 export default function Blog() {
     const blog_posts: BlogPostMetaData[] = React.useMemo(() => {
@@ -11,13 +10,9 @@ export default function Blog() {
         const filenames = fs.readdirSync(posts_dir);
 
         return filenames.map((filename) => {
-            const slug = fileNameToSlug(filename);
-            return {
-                title: slugToTitle(slug), slug,
-                // get the date when the file was created
-                unix_timestamp: fs.statSync(path.join(posts_dir, filename)).birthtimeMs
-            }
-        })
+            const file_path = path.join(process.cwd(), 'content', 'blog', filename)
+            return getBlogPostMetaData(file_path);
+        }).filter(Boolean) as BlogPostMetaData[];
     }, []);
 
     return (

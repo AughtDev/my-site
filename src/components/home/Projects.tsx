@@ -6,6 +6,7 @@ import {getProjectMetaData} from "@/utils/markdown";
 import useMediaType from "@/utils/hooks/useMediaType";
 import ProjectCard from "@/components/home/ProjectCard";
 import ProjectCardV2 from "@/components/home/ProjectCardV2";
+import {useMediaQuery} from "react-responsive";
 
 export interface ProjectMetaData {
     title: string
@@ -22,22 +23,24 @@ interface ProjectsProps {
 }
 
 export default function Projects({projects}: ProjectsProps) {
-    const {is_desktop, is_tablet} = useMediaType()
+    // const is_mobile = useMediaQuery({maxWidth: 564})
+    const is_wide_screen = useMediaQuery({minWidth: 1200})
+    const is_tablet = useMediaQuery({minWidth: 564, maxWidth: 1199})
 
     const container_class_name = React.useMemo(() => {
         let class_name = "flex flex-col items-center py-4 mt-4 px-4"
-        if (is_desktop) {
+        if (is_wide_screen) {
             class_name += " w-9/12"
         } else {
             class_name += " w-6/6"
         }
         return class_name
-    }, [is_desktop]);
+    }, [is_wide_screen]);
     const num_grid_cols = React.useMemo(() => {
-        if (is_desktop) return 3;
+        if (is_wide_screen) return 3;
         if (is_tablet) return 2;
         return 1;
-    }, [is_desktop, is_tablet]);
+    }, [is_tablet, is_wide_screen]);
     
 
     return (

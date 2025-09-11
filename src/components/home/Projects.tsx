@@ -5,6 +5,7 @@ import fs from "node:fs";
 import {getProjectMetaData} from "@/utils/markdown";
 import useMediaType from "@/utils/hooks/useMediaType";
 import ProjectCard from "@/components/home/ProjectCard";
+import ProjectCardV2 from "@/components/home/ProjectCardV2";
 
 export interface ProjectMetaData {
     title: string
@@ -12,6 +13,7 @@ export interface ProjectMetaData {
     unix_timestamp: number
     description: string
     github_link?: string
+    site_link?: string
     img_src?: string
 }
 
@@ -23,7 +25,7 @@ export default function Projects({projects}: ProjectsProps) {
     const {is_desktop, is_tablet} = useMediaType()
 
     const container_class_name = React.useMemo(() => {
-        let class_name = "flex flex-col items-center py-4 mt-4"
+        let class_name = "flex flex-col items-center py-4 mt-4 px-4"
         if (is_desktop) {
             class_name += " w-9/12"
         } else {
@@ -40,17 +42,17 @@ export default function Projects({projects}: ProjectsProps) {
 
     return (
         <div className={container_class_name}>
-            <p className={"text-red-400 underline"} style={{fontSize: "2rem"}}>
+            <p className={"text-red-400 underline mb-4"} style={{fontSize: "2rem"}}>
                 Projects
             </p>
             <div
-                className={`grid gap-4 w-full mt-4`}
+                className={`grid gap-8 w-full mt-4`}
                 style={{
                     gridTemplateColumns: `repeat(${num_grid_cols}, minmax(0, 1fr))`
                 }}
             >
                 {projects.map(project => (
-                    <ProjectCard key={project.slug} project={project}/>
+                    <ProjectCardV2 key={project.slug} project={project}/>
                 ))}
             </div>
         </div>

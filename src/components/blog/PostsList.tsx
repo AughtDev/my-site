@@ -46,7 +46,7 @@ export default function BlogPostsList({posts} : BlogPostsListProps) {
                     className={"hover:underline hover:text-red-300"}>
                     <div className="flex flex-col justify-between align-center w-full">
                         <p className={"text-lg"}> {title} </p>
-                        <p className="text-gray-500 text-sm"> {
+                        <p className="text-gray-500 text-xs"> {
                             new Date(unix_timestamp).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'short',

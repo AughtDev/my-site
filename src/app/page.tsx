@@ -19,7 +19,9 @@ export default function Home() {
 
     return (
         <div className="flex flex-col items-center justify-center w-full">
-            <div className="flex flex-row w-full justify-between">
+            <div style={{
+                height: "60vh"
+            }} className="flex flex-row w-full justify-between">
                 <div className="flex flex-row items-center justify-center"
                      style={{
                          // gap: "3rem",

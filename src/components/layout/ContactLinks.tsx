@@ -46,7 +46,7 @@ export default function ContactLinks() {
     return (
         <div
             style={{
-                backgroundColor: theme === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)",
+                backgroundColor: theme === "dark" ? "rgba(0,0,0,0.4)" : "rgba(255,255,255,0.4)",
             }}
             className={div_class_name}>
             {LINKS.map((link) => (

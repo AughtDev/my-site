@@ -58,6 +58,7 @@ export function getProjectMetaData(file_path: string): ProjectMetaData | undefin
         title: matter_result.data.title || slugToTitle(slug),
         description: matter_result.data.description || "...",
         github_link: matter_result.data.github_link || undefined,
+        site_link: matter_result.data.site_link || undefined,
         img_src: matter_result.data.img_src || undefined,
         slug: slug,
         unix_timestamp: fs.statSync(file_path).birthtimeMs
@@ -66,6 +67,7 @@ export function getProjectMetaData(file_path: string): ProjectMetaData | undefin
 
 
 export function getBlogPostMetaData(file_path: string): BlogPostMetaData | undefined {
+
     const file_content = fs.readFileSync(file_path, 'utf8')
 
     if (!file_content) return undefined
@@ -78,6 +80,7 @@ export function getBlogPostMetaData(file_path: string): BlogPostMetaData | undef
     const slug = path.basename(file_path,".md")
 
     console.log("slug is ", slug,"file_path is ",file_path)
+
 
     return {
         title: matter_result.data.title || slugToTitle(slug),

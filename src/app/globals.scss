@@ -1,9 +1,11 @@
-@import "tailwindcss";
 @import "@/styles/markdown";
+@import "@/styles/tailwind";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  // --background: #ffffff;
+  --background: rgb(255, 255, 255);
+  // --foreground: #171717;
+  --foreground: rgb(23, 23, 23);
 }
 
 @theme inline {
@@ -21,8 +23,10 @@
 
 /* New CSS to override based on the data-theme attribute */
 [data-theme='dark'] {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  // --background: #0a0a0a;
+  --background: rgb(10, 10, 10);
+  // --foreground: #ededed;
+  --foreground: rgb(237, 237, 237);
 
   pre, pre span {
     color: var(--shiki-dark) !important;
@@ -35,8 +39,10 @@
 }
 
 [data-theme='light'] {
-  --background: #fff;
-  --foreground: #000;
+  // --background: #fff;
+  --background: rgb(255, 255, 255);
+  // --foreground: #000;
+  --foreground: rgb(0, 0, 0);
 
   pre, pre span {
     color: var(--shiki-light) !important;
@@ -70,3 +76,4 @@ svg#x-icon {
   stroke: var(--foreground);
   fill: var(--foreground);
 }
+

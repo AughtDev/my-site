@@ -86,7 +86,7 @@ export default function HeaderTab({tabs}: HeaderTabProps) {
 
             <div
                 style={{
-                    backgroundColor: theme === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.6)",
+                    backgroundColor: theme === "dark" ? "rgba(0,0,0,0.4)" : "rgba(255,255,255,0.4)",
                 }}
                 className={`flex flex-row items-center space-x-8 py-3 px-5 ${is_desktop ? "mr-5" : "mr-4"} rounded-3xl backdrop-blur-md`}>
                 <div className={"flex flex-row space-x-8"}>

@@ -13,7 +13,7 @@ interface ContactLink {
 const LINKS: ContactLink[] = [
     {
         label: "GitHub",
-        href: "",
+        href: "https://github.com/AughtDev",
         icon: GithubIcon,
     },
     {

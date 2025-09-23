@@ -85,6 +85,7 @@ export function getBlogPostMetaData(file_path: string): BlogPostMetaData | undef
     return {
         title: matter_result.data.title || slugToTitle(slug),
         slug: slug,
+        description: matter_result.data.description,
         unix_timestamp: fs.statSync(file_path).birthtimeMs
     }
 }

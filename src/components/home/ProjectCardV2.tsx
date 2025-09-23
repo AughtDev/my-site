@@ -35,13 +35,13 @@ export default function ProjectCardV2({project}: ProjectCardV2Props) {
     const [outline_color, divider_color, text_color] = React.useMemo(() => {
         if (theme === "dark") {
             if (is_hovered) {
-                return ['rgba(200, 100, 100, 0.5)', 'rgba(255, 100, 100, 0.2)', 'text-red-400'];
+                return ['rgba(200, 100, 100, 0.5)', 'rgba(255, 100, 100, 0.2)', 'text-red-300'];
             } else {
                 return ['rgba(200, 100, 100, 0.2)', 'rgba(255, 100, 100, 0.1)', ''];
             }
         } else {
             if (is_hovered) {
-                return ['rgba(250, 150, 150, 0.8)', 'rgba(255, 100, 100, 0.2)', 'text-red-400'];
+                return ['rgba(250, 150, 150, 0.8)', 'rgba(255, 100, 100, 0.2)', 'text-red-300'];
             } else {
                 return ['rgba(250, 150, 150, 0.4)', 'rgba(255, 100, 100, 0.1)', ''];
             }
@@ -61,7 +61,8 @@ export default function ProjectCardV2({project}: ProjectCardV2Props) {
                     <p className={`text-lg ${text_color}`}>{project.title}</p>
                     <div className={"flex flex-row items-center gap-2"}>
                         {project.github_link && <a href={project.github_link}>
-                            <CutoutGithubIcon className={"hover:fill-red-400 transition-colors duration-200"} size={20}/>
+                            <CutoutGithubIcon className={"hover:fill-red-400 transition-colors duration-200"}
+                                              size={20}/>
                         </a>}
                         {project.site_link && <a href={project.site_link}>
                             <Link2 className={"hover:stroke-red-400"} size={20}/>
@@ -70,13 +71,13 @@ export default function ProjectCardV2({project}: ProjectCardV2Props) {
                 </div>
                 <hr className={`border-t-2 border-dashed ${divider_color} opacity-20 w-full`}/>
                 <div className={"w-full h-50"}>
-                    <p className={"text-sm"}>{project.description}</p>
+                    <p className={"text-sm text-gray-500"}>{project.description}</p>
                 </div>
                 <hr className={`border-t-2 border-dashed ${divider_color} opacity-10 w-full`}/>
                 <div className={"flex flex-row items-center justify-between w-full"}>
                     <div className={"flex flex-row items-center gap-2"}>
                     </div>
-                    <p className="text-gray-500 text-xs"> {
+                    <p className={`${text_color ? text_color : "text-gray-500"} text-xs`}> {
                         new Date(project.unix_timestamp).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',

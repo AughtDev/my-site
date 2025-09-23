@@ -1,3 +1,8 @@
+---
+title: Bees, a retrospective
+description: A test article about bees, yay!!
+---
+
 # Markdown Style Test: The Enigmatic World of Bees
 
 Bees are more than just honey makers; they are a cornerstone of our ecosystem. They are a fascinating and incredibly diverse group of insects, with over **20,000 known species** buzzing across the globe.

@@ -1,5 +1,5 @@
 import {visit} from 'unist-util-visit'
-import {ElementContent, Root} from "hast";
+import {ElementContent,Element as HastElement, Root} from "hast";
 
 
 const CLIPBOARD_SVG: ElementContent = {
@@ -130,22 +130,23 @@ export default function rehypeCodeMeta() {
 
             // find button
             let copyBtn: ElementContent | null = null;
-            const code_block = (node.children.find((child) => child.type === 'element' && child.tagName === 'code') as Element | undefined)
+            const code_block = (node.children.find((child) => child.type === 'element' && child.tagName === 'code') as HastElement | undefined)
             if (code_block) {
-                const oldCopyBtn = Array.from(code_block.children).find((child) => child.tagName === 'button')
+                const oldCopyBtn = Array.from(code_block.children).find((child) => (child as HastElement).tagName === 'button')
                 if (oldCopyBtn) {
                     copyBtn = {
                         type: 'element',
                         tagName: 'button',
                         properties: {
-                            ...oldCopyBtn.properties,
+                            ...(oldCopyBtn as HastElement).properties,
                             className: ['copy-btn']
                         },
                         // 2 svgs, a clip board and a check mark
                         children: [CLIPBOARD_SVG, CHECKMARK_SVG]
-                    }
+                    };
                     // remove old button
-                    oldCopyBtn.properties["style"] = "display: none;"
+                    (oldCopyBtn as HastElement).properties["style"] = "display: none;"
+                    console.log(oldCopyBtn)
 
                 }
             }

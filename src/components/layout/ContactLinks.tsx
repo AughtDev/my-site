@@ -30,29 +30,30 @@ export default function ContactLinks() {
     const div_class_name = React.useMemo(() => {
         let class_name = "fixed flex items-center justify-center rounded-3xl backdrop-blur-md"
         if (is_desktop) {
-            class_name += " mt-32 p-4 flex-col gap-12 right-0 top-0"
+            class_name += " mt-32 py-4 px-3 flex-col gap-12 top-0"
         } else {
-            class_name += " flex-row gap-2 right-1 bottom-1 p-3"
+            class_name += " flex-row gap-2 bottom-1 p-3"
         }
         return class_name
     }, [is_desktop]);
 
     const icon_size = React.useMemo(() => {
-        if (is_mobile) return "24"
-        if (is_tablet) return "28"
-        return "32"
+        if (is_mobile) return 24
+        if (is_tablet) return 28
+        return 32
     }, [is_mobile,is_tablet]);
 
     return (
         <div
             style={{
                 backgroundColor: theme === "dark" ? "rgba(0,0,0,0.4)" : "rgba(255,255,255,0.4)",
+                right: is_desktop ? ".5rem" : "0.5rem",
             }}
             className={div_class_name}>
             {LINKS.map((link) => (
                 <a key={link.label} href={link.href} target={"_blank"} rel={"noreferrer"}>
                     <div
-                        className={"m-2 hover:opacity-70 transition-opacity cursor-pointer"}>
+                        className={"m-2 hover:opacity-70 transition-opacity cursor-pointer translate-x-1"}>
                         <link.icon size={icon_size}/>
                     </div>
                 </a>

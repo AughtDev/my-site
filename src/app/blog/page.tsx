@@ -7,7 +7,12 @@ import {getBlogPostMetaData} from "@/utils/markdown";
 export default function Blog() {
     const blog_posts: BlogPostMetaData[] = React.useMemo(() => {
         const posts_dir = path.join(process.cwd(), 'content', 'blog');
-        const filenames = fs.readdirSync(posts_dir);
+        let filenames: string[] = [];
+        try {
+            filenames = fs.readdirSync(posts_dir);
+        } catch {
+            return []
+        }
 
         return filenames.map((filename) => {
             const file_path = path.join(process.cwd(), 'content', 'blog', filename)

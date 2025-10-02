@@ -9,7 +9,13 @@ import {getProjectMetaData} from "@/utils/markdown";
 export default function Home() {
     const projects: ProjectMetaData[] = React.useMemo(() => {
         const posts_dir = path.join(process.cwd(), 'content', 'projects');
-        const filenames = fs.readdirSync(posts_dir);
+        let filenames: string[] = [];
+
+        try {
+            filenames = fs.readdirSync(posts_dir);
+        } catch {
+            return []
+        }
 
         return filenames.map((filename) => {
             const file_path = path.join(process.cwd(), 'content', 'projects', filename)

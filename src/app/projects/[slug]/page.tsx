@@ -12,14 +12,18 @@ interface ProjectPageProps {
 
 
 export async function generateStaticParams() {
-    const posts_dir = path.join(process.cwd(), 'content', 'projects');
-    const filenames = fs.readdirSync(posts_dir);
+    try {
+        const posts_dir = path.join(process.cwd(), 'content', 'projects');
+        const filenames = fs.readdirSync(posts_dir);
 
-    return filenames.map((filename) => {
-        return {
-            slug: filename.replace(/\.md$/, '')
-        }
-    })
+        return filenames.map((filename) => {
+            return {
+                slug: filename.replace(/\.md$/, '')
+            }
+        })
+    } catch {
+        return []
+    }
 }
 
 export default async function ProjectPage({params}: ProjectPageProps) {

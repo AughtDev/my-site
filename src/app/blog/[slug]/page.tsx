@@ -2,16 +2,6 @@ import React from "react";
 
 import path from "node:path";
 import * as fs from "node:fs";
-import matter from 'gray-matter'
-
-import {remark} from 'remark'
-import remarkRehype from "remark-rehype";
-import {slugToTitle} from "@/utils/strings";
-import rehypeStringify from "rehype-stringify";
-import rehypeShiki from "@shikijs/rehype";
-import rehypePrettyCode from "rehype-pretty-code";
-import {transformerCopyButton} from "@rehype-pretty/transformers";
-import rehypeCodeMeta from "@/lib/rehype-code-meta";
 import BlogPostContent from "@/components/blog/BlogPostContent";
 import {convertMarkdownFileToHtml} from "@/utils/markdown";
 
@@ -24,14 +14,18 @@ interface BlogPostProps {
 
 
 export async function generateStaticParams() {
-    const posts_dir = path.join(process.cwd(), 'content', 'blog');
-    const filenames = fs.readdirSync(posts_dir);
+    try {
+        const posts_dir = path.join(process.cwd(), 'content', 'blog');
+        const filenames = fs.readdirSync(posts_dir);
 
-    return filenames.map((filename) => {
-        return {
-            slug: filename.replace(/\.md$/, '')
-        }
-    })
+        return filenames.map((filename) => {
+            return {
+                slug: filename.replace(/\.md$/, '')
+            }
+        })
+    } catch {
+        return []
+    }
 }
 
 export default async function BlogPost({params}: BlogPostProps) {

@@ -21,7 +21,8 @@ $highlight-color: #F66A74; // Or whatever color you choose
 // Select the markdown container
 article.markdown {
   // Styles for the entire article
-  line-height: 1.6;
+  line-height: 1.8;
+  //font-size: 17px;
 
   // Use a loop to style h1 through h6
   @for $i from 1 through 6 {
@@ -34,9 +35,9 @@ article.markdown {
       position: relative;
       // Adjust padding based on header level
       padding-left: 0.9rem + (1.3rem * $i);
-      margin-bottom: 0.3rem + (0.15rem * (6 - $i));
+      margin-bottom: 0.5rem + (0.15rem * (6 - $i));
       line-height: 1;
-      margin-top: 0.1rem * $i;
+      margin-top: 0.3rem * $i;
       font-weight: 500;
       font-size: 2.2rem - (0.25rem * ($i - 1));
 
@@ -74,6 +75,15 @@ article.markdown {
   // Lists (ordered and unordered)
   ul, ol {
     padding-left: 2rem;
+    margin: 1rem 0;
+    li {
+        margin: 0.8rem 0;
+        line-height: 1.6;
+    }
+  }
+
+  p {
+    margin: 1rem 0;
   }
 
   // List item bullets/numbers
@@ -82,13 +92,28 @@ article.markdown {
     opacity: 0.6;
   }
 
+  table {
+    width: 100%;
+    tr {
+      width: 100%;
+    }
+  }
+
   // Images
   img {
-    border-radius: 16px;
-    width: 80%;
-    height: auto;
-    margin: 1rem 0;
+    border-radius: 8px;
+    margin: 2rem 0;
+    max-height: 100vh;
+    ////height: auto;
+    //margin: 1rem;
   }
+
+  p:has(> img:first-child) {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+  }
+
 
   // Bold and italic text
   //strong, b, em, i {
@@ -205,6 +230,7 @@ article.markdown {
       pre {
         padding: 2.3rem 0.7rem 1rem;
       }
+
       button[aria-label="Copy code"] {
         height: 22px;
         width: 22px;

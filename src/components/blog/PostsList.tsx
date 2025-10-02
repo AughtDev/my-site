@@ -14,8 +14,8 @@ interface BlogPostsListProps {
     posts: BlogPostMetaData[];
 }
 
-export default function BlogPostsList({posts} : BlogPostsListProps) {
-    const {is_desktop,is_tablet} = useMediaType()
+export default function BlogPostsList({posts}: BlogPostsListProps) {
+    const {is_desktop, is_tablet} = useMediaType()
 
     const list_div_class_name: string = React.useMemo(() => {
         let class_name = "flex flex-col gap-4"
@@ -27,33 +27,24 @@ export default function BlogPostsList({posts} : BlogPostsListProps) {
             class_name += " w-full items-start pt-26 px-4"
         }
         return class_name
-    }, [is_desktop,is_tablet]);
-    
+    }, [is_desktop, is_tablet]);
+
     return (
         <div
             className={list_div_class_name}>
-            {posts.map(blogpost => (
+            {posts.length > 0 ? posts.map(blogpost => (
                 <BlogPostCard key={blogpost.slug} blogpost={blogpost}/>
-                // <Link
-                //     key={slug}
-                //     style={{
-                //         width: '100%',
-                //         height: "2rem"
-                //     }}
-                //     href={`/blog/${slug}`}
-                //     className={"hover:underline hover:text-red-300"}>
-                //     <div className="flex flex-col justify-between align-center w-full">
-                //         <p className={"text-lg"}> {title} </p>
-                //         <p className="text-gray-500 text-xs"> {
-                //             new Date(unix_timestamp).toLocaleDateString('en-US', {
-                //                 year: 'numeric',
-                //                 month: 'short',
-                //                 day: 'numeric'
-                //             })
-                //         } </p>
-                //     </div>
-                // </Link>
-            ))}
+            )) : (
+                <div
+                    style={{
+                        height: "50vh"
+                    }}
+                    className={"w-full flex items-center justify-center"}>
+                    <h2 className={"text-3xl text-center"}>
+                        No Blog Posts Yet :(
+                    </h2>
+                </div>
+            )}
         </div>
     )
- }
+}

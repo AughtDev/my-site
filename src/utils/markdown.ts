@@ -10,6 +10,7 @@ import {ProjectMetaData} from "@/components/home/Projects";
 import {slugToTitle} from "@/utils/strings";
 import {BlogPostMetaData} from "@/components/blog/PostsList";
 import path from "node:path";
+import remarkGfm from "remark-gfm";
 
 export async function convertMarkdownFileToHtml(file_path: string): Promise<string | undefined> {
     const file_content = fs.readFileSync(file_path, 'utf8')
@@ -18,6 +19,7 @@ export async function convertMarkdownFileToHtml(file_path: string): Promise<stri
 
     const processed_content = await remark()
         .use(remarkRehype)
+        .use(remarkGfm)
         .use(rehypePrettyCode, {
             theme: {
                 light: "rose-pine-dawn",
@@ -52,13 +54,14 @@ export function getProjectMetaData(file_path: string): ProjectMetaData | undefin
     if (!matter_result) return undefined
 
     // const slug = file_path.split('/').pop()?.replace(/\.md$/, '') || ""
-    const slug = path.basename(file_path,".md")
+    const slug = path.basename(file_path, ".md")
 
     return {
         title: matter_result.data.title || slugToTitle(slug),
         description: matter_result.data.description || "...",
         github_link: matter_result.data.github_link || undefined,
         site_link: matter_result.data.site_link || undefined,
+        blogpost_link: matter_result.data.site_link || undefined,
         img_src: matter_result.data.img_src || undefined,
         slug: slug,
         unix_timestamp: fs.statSync(file_path).birthtimeMs
@@ -77,9 +80,9 @@ export function getBlogPostMetaData(file_path: string): BlogPostMetaData | undef
     if (!matter_result) return undefined
 
     // const slug = file_path.split('/').pop()?.replace(/\.md$/, '') || ""
-    const slug = path.basename(file_path,".md")
+    const slug = path.basename(file_path, ".md")
 
-    console.log("slug is ", slug,"file_path is ",file_path)
+    console.log("slug is ", slug, "file_path is ", file_path)
 
 
     return {

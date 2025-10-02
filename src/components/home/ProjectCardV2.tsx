@@ -3,8 +3,8 @@ import React from 'react';
 import {ProjectMetaData} from "@/components/home/Projects";
 import Link from "next/link";
 import useTheme from "@/components/theme/useTheme";
-import {Link2, LucideGithub} from "lucide-react";
-import {CutoutGithubIcon, GithubIcon} from "@/assets/icons";
+import {FileText, Link2} from "lucide-react";
+import {CutoutGithubIcon} from "@/assets/icons";
 
 interface ProjectCardV2Props {
     project: ProjectMetaData
@@ -48,6 +48,35 @@ export default function ProjectCardV2({project}: ProjectCardV2Props) {
         }
     }, [is_hovered, theme]);
 
+    // Define an interface for icon links
+    interface IconLink {
+        href?: string;
+        title: string;
+        Icon: (props: {size: number,className: string}) => React.ReactNode
+        className: string;
+    }
+
+    const icon_links: IconLink[] = React.useMemo(() => ([
+        {
+            href: project.github_link,
+            title: "View on GitHub",
+            Icon: CutoutGithubIcon,
+            className: "hover:fill-red-400 transition-colors duration-200"
+        },
+        {
+            href: project.blogpost_link,
+            title: "Read Blog Post",
+            Icon: FileText,
+            className: "hover:stroke-red-400"
+        },
+        {
+            href: project.site_link,
+            title: "Visit Site",
+            Icon: Link2,
+            className: "hover:stroke-red-400"
+        }
+    ]), [project.blogpost_link, project.github_link, project.site_link])
+
     return (
         <Link
             href={`/projects/${project.slug}`}>
@@ -60,13 +89,13 @@ export default function ProjectCardV2({project}: ProjectCardV2Props) {
                 <div className={"flex flex-row w-full justify-between items-center"}>
                     <p className={`text-lg ${text_color}`}>{project.title}</p>
                     <div className={"flex flex-row items-center gap-2"}>
-                        {project.github_link && <a href={project.github_link}>
-                            <CutoutGithubIcon className={"hover:fill-red-400 transition-colors duration-200"}
-                                              size={20}/>
-                        </a>}
-                        {project.site_link && <a href={project.site_link}>
-                            <Link2 className={"hover:stroke-red-400"} size={20}/>
-                        </a>}
+                        {icon_links.filter(link => link.href).map(({href, title, Icon, className}) => (
+                            <a key={title} href={href} title={title}
+                               target="_blank" rel="noopener noreferrer"
+                               onClick={e => e.stopPropagation()}>
+                                <Icon className={className} size={20}/>
+                            </a>
+                        ))}
                     </div>
                 </div>
                 <hr className={`border-t-2 border-dashed ${divider_color} opacity-20 w-full`}/>

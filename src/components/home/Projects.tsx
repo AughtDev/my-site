@@ -1,10 +1,5 @@
 "use client"
 import React from 'react';
-import path from "node:path";
-import fs from "node:fs";
-import {getProjectMetaData} from "@/utils/markdown";
-import useMediaType from "@/utils/hooks/useMediaType";
-import ProjectCard from "@/components/home/ProjectCard";
 import ProjectCardV2 from "@/components/home/ProjectCardV2";
 import {useMediaQuery} from "react-responsive";
 
@@ -15,6 +10,7 @@ export interface ProjectMetaData {
     description: string
     github_link?: string
     site_link?: string
+    blogpost_link?: string
     img_src?: string
 }
 
@@ -54,9 +50,13 @@ export default function Projects({projects}: ProjectsProps) {
                     gridTemplateColumns: `repeat(${num_grid_cols}, minmax(0, 1fr))`
                 }}
             >
-                {projects.map(project => (
+                {projects.length > 0 ? projects.map(project => (
                     <ProjectCardV2 key={project.slug} project={project}/>
-                ))}
+                )): (
+                    <div className={"w-full h-full flex items-center justify-center"}>
+                        <h2>No Projects Yet :(</h2>
+                    </div>
+                )}
             </div>
         </div>
     )

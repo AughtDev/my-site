@@ -35,7 +35,8 @@ export default function BlogPostContent({html_content}: BlogPostContentProps) {
                 tds.length > 0 &&
                 tds.every(td => td.children.length === 1 && td.children[0].tagName === 'IMG')
             ) {
-                // set the spacing between the tds
+                // Hide row to prevent flicker
+                (row as HTMLElement).style.visibility = 'hidden';
                 (row as HTMLElement).style.gap = `${IMAGE_GAP}px`;
                 (row as HTMLElement).style.justifyContent = "flex-start";
                 (row as HTMLElement).style.display = "flex";
@@ -60,6 +61,8 @@ export default function BlogPostContent({html_content}: BlogPostContentProps) {
                         img.style.objectFit = 'contain';
                         img.style.display = 'block';
                     });
+                    // Show row after adjustment
+                    (row as HTMLElement).style.visibility = 'visible';
                 });
             }
         });

@@ -14,9 +14,6 @@ A feature overview of the free, open-source WakaTime client focused on local dat
 **WakaWaka** was developed with the principle of data ownership in mind. It is a "local-first" Android client that 
 fetches WakaTime API data and stores it on your device, allowing for unrestricted access to your entire coding history.
 
-| ![](/media/wakawaka/projects-tab-screenshot.jpg) | ![](/media/wakawaka/home-tab-screenshot.jpg) | ![](/media/wakawaka/settings-tab-screenshot.jpg) |
-|--------------------------------------------------|----------------------------------------------|--------------------------------------------------|
-
 ### **Home Dashboard**
 
 The main screen of the application provides a summary of coding activity. The primary UI element is a calendar view, modeled after GitHub's contribution graph, which visualizes daily coding duration. The opacity of each day is scaled to the coding time, with an algorithm that adjusts the range to provide visual contrast even for projects with lower daily durations. Days on which a daily target is met are indicated with a colored ring.
@@ -38,8 +35,8 @@ From this view, users can also:
 * **Assign to Widget:** Toggle a project to be displayed in the dedicated single-project home screen widget.
 * **Customize:** Navigate to an edit screen to configure project-specific daily and weekly targets and set a custom color for use in all charts and graphs.
 
-[//]: # ()
-[//]: # (![projects-tab-screenshot.jpg]&#40;/media/wakawaka/projects-tab-screenshot.jpg&#41;)
+| ![](/media/wakawaka/projects-tab-screenshot.jpg) | ![](/media/wakawaka/home-tab-screenshot.jpg) | ![](/media/wakawaka/settings-tab-screenshot.jpg) |
+|--------------------------------------------------|----------------------------------------------|--------------------------------------------------|
 
 ### **Goal and Streak Tracking**
 

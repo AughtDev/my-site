@@ -146,7 +146,6 @@ export default function rehypeCodeMeta() {
                     };
                     // remove old button
                     (oldCopyBtn as HastElement).properties["style"] = "display: none;"
-                    console.log(oldCopyBtn)
 
                 }
             }
@@ -171,3 +170,4 @@ export default function rehypeCodeMeta() {
 
     }
 }
+

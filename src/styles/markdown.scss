@@ -27,14 +27,14 @@ article.markdown {
   // Use a loop to style h1 through h6
   @for $i from 1 through 6 {
     // Generate the correct number of hashtags
-    $hashtags: "";
-    @for $j from 1 through $i {
-      $hashtags: $hashtags + "#";
-    }
+    $hashtags: "H" + $i;
+    //@for $j from 1 through $i {
+    //  $hashtags: $hashtags + "#";
+    //}
     h#{$i} {
       position: relative;
       // Adjust padding based on header level
-      padding-left: 0.9rem + (1.3rem * $i);
+      padding-left: 2.6rem;
       margin-bottom: 0.5rem + (0.15rem * (6 - $i));
       line-height: 1;
       margin-top: 0.3rem * $i;
@@ -46,10 +46,11 @@ article.markdown {
         content: '#{$hashtags}';
         position: absolute;
         left: 0;
+        bottom: 0;
         font-weight: 600;
-        font-family: "Comic Sans MS", serif;
-        letter-spacing: 0.05em;
-        //font-size: 2rem;
+        font-family: "Arial", serif;
+        //letter-spacing: 0.1em;
+        font-size: 1rem + (0.15rem * (6 - $i));
         scale: 0.9 1;
         color: var(--highlight);
         opacity: 0.3;
@@ -59,14 +60,22 @@ article.markdown {
       h#{$i} {
         font-size: 1.8rem - (0.2rem * ($i - 1));
         //padding-left: 0.9rem + (1.3rem * $i);
-        padding-left: 0.8rem + (1.0rem * $i);
+        //padding-left: 0.8rem + (1.0rem * $i);
+        padding-left: 1.6rem;
+        &::before {
+          font-size: 0.6rem + (0.12rem * (6 - $i));
+        }
       }
     }
     &.markdown-mobile {
       h#{$i} {
         font-size: 1.5rem - (0.15rem * ($i - 1));
         //padding-left: 0.9rem + (1.3rem * $i);
-        padding-left: 0.7rem + (0.9rem * $i);
+        //padding-left: 0.7rem + (0.9rem * $i);
+        padding-left: 1.4rem;
+        &::before {
+          font-size: 0.4rem + (0.10rem * (6 - $i));
+        }
       }
     }
   }
@@ -76,10 +85,23 @@ article.markdown {
   ul, ol {
     padding-left: 2rem;
     margin: 1rem 0;
+
     li {
-        margin: 0.8rem 0;
-        line-height: 1.6;
+      margin: 0.8rem 0;
+      line-height: 1.6;
     }
+  }
+
+  // add dots before unordered list items
+  ul li::before {
+    position: absolute;
+    content: '•';
+    color: var(--highlight);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size: 1.2em;
+    line-height: 1.6;
   }
 
   p {
@@ -94,6 +116,7 @@ article.markdown {
 
   table {
     width: 100%;
+
     tr {
       width: 100%;
     }
@@ -134,27 +157,34 @@ article.markdown {
   }
 
   figure {
-    margin: 1rem;
+    position: relative;
+    //margin: 1rem;
 
     div.code-header {
-      position: absolute;
+      //background-color: blue;
+      position: sticky;
+      z-index: 2;
       width: 100%;
       top: 0;
       left: 0;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      padding: 0.1rem .7rem;
-      margin-bottom: 0.5rem;
+      //padding: 0.1rem 0;
+      padding-top: 0.3rem;
+      //margin-bottom: 0.5rem;
       //border-bottom: 1px solid var(--sh-class);
       color: var(--highlight);
 
     }
 
     hr {
-      position: absolute;
-      top: 0.8rem;
+      position: sticky;
+      //top: 0.9rem;
       left: 0;
+      transform: translateX(-1rem);
+      padding: 0;
+      margin: 0.2rem 0.2rem 0.4rem;
       width: 50%;
       border: none;
       border-top: 1px solid var(--sh-class);
@@ -167,7 +197,7 @@ article.markdown {
       right: 0;
       height: 25px;
       width: 25px;
-      margin: .7rem;
+      margin-top: .7rem;
       cursor: pointer;
 
       &:hover {
@@ -206,7 +236,7 @@ article.markdown {
     pre {
       position: relative;
       border-radius: 16px;
-      padding: 2.3rem 1rem 1rem;
+      padding: 0 1rem 1rem 1rem;
       width: 100%;
       overflow-x: auto;
     }
@@ -228,7 +258,8 @@ article.markdown {
       margin: 0.7rem;
 
       pre {
-        padding: 2.3rem 0.7rem 1rem;
+        //padding: 2.3rem 0.7rem 1rem;
+        padding: 0 1rem;
       }
 
       button[aria-label="Copy code"] {
@@ -256,7 +287,7 @@ article.markdown {
 
       pre {
         width: 100%;
-        padding: 2.3rem 0.5rem 1rem;
+        //padding: 2.3rem 0.5rem 1rem;
       }
 
       button[aria-label="Copy code"] {
